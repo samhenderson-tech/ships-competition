@@ -130,8 +130,8 @@ const HORMUZ = {
   ],
 };
 
-// Finish line target point (western edge of gate - ships cross west to east)
-const FINISH_LINE = { lat: 25.94, lng: 56.42 };
+// Finish line target point (center of gate line, where the label is)
+const FINISH_LINE = { lat: 25.94, lng: 56.8 };
 
 // Musandam Peninsula obstacle (simplified triangle for land-avoidance routing)
 const MUSANDAM_POLYGON = [
