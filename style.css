@@ -10,8 +10,6 @@
   --text-muted: #64748b;
   --border: #1e293b;
   --passed: #10b981;
-  --moving: #f59e0b;
-  --waiting: #64748b;
   --danger: #ef4444;
   --accent: #3b82f6;
   --gold: #ffd700;
@@ -233,7 +231,7 @@ body {
 }
 
 .closest-ship .ship-highlight {
-  color: var(--moving);
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -422,15 +420,9 @@ body {
   border-color: var(--passed);
 }
 
-.progress-dot.moving {
-  background: var(--moving);
-  border-color: var(--moving);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.progress-dot.waiting {
+.progress-dot.racing {
   background: transparent;
-  border-color: var(--waiting);
+  border-color: var(--accent);
 }
 
 @keyframes pulse {
@@ -596,10 +588,6 @@ body {
   border-left-color: var(--passed);
 }
 
-.log-entry.moving {
-  border-left-color: var(--moving);
-}
-
 .log-text {
   font-size: 13px;
   line-height: 1.4;
@@ -749,14 +737,8 @@ body {
   box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
 }
 
-.ship-status-indicator.moving {
-  background: var(--moving);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.ship-status-indicator.waiting {
-  background: var(--waiting);
+.ship-status-indicator.racing {
+  background: var(--accent);
 }
 
 .ship-details {
@@ -816,11 +798,6 @@ body {
   white-space: nowrap;
 }
 
-.ship-actions {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
 
 .ship-card.ship-passed {
   opacity: 0.6;
@@ -853,44 +830,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-.btn-move {
-  background: transparent;
-  border-color: var(--waiting);
-  color: var(--waiting);
-}
-
-.btn-move:hover {
-  border-color: var(--moving);
-  color: var(--moving);
-}
-
-.btn-move.active {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: var(--moving);
-  color: var(--moving);
-}
-
-.btn-pass {
-  background: transparent;
-  border-color: var(--passed);
-  color: var(--passed);
-}
-
-.btn-pass:hover {
-  background: var(--passed);
-  color: white;
-}
-
-.btn-undo {
-  background: transparent;
-  border-color: var(--text-muted);
-  color: var(--text-muted);
-}
-
-.btn-undo:hover {
-  border-color: var(--danger);
-  color: var(--danger);
-}
 
 /* ============================================
    CONFETTI CANVAS
@@ -1101,10 +1040,6 @@ body {
 
   #ship-list {
     grid-template-columns: 1fr;
-  }
-
-  .ship-actions {
-    flex-direction: column;
   }
 
   .sort-controls {

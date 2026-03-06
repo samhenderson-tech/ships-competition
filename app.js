@@ -23,8 +23,8 @@ class ShipTracker {
       const state = JSON.parse(saved);
       if (!state.positions) state.positions = {};
       if (!state.passed) state.passed = {};
-      if (!state.moving) state.moving = {};
       if (!state.raceLog) state.raceLog = [];
+      delete state.moving;
       if (state.version !== DATA_VERSION) {
         state.positions = {};
         state.version = DATA_VERSION;
@@ -35,7 +35,6 @@ class ShipTracker {
       version: DATA_VERSION,
       passed: {},
       positions: {},
-      moving: {},
       raceLog: [],
     };
   }
@@ -213,6 +212,7 @@ class ShipTracker {
 
   init() {
     this.ensureAllPositions();
+    this.checkFinishCrossings();
     this.ensureRaceLog();
     this.computeAllDistances();
     this.initMap();
@@ -224,6 +224,7 @@ class ShipTracker {
     this.detectWinner();
     this.initMobileTabs();
     this.startClock();
+    this.startAutoRefresh();
   }
 
   initMobileTabs() {
@@ -363,9 +364,8 @@ class ShipTracker {
         ).join("")}
         <div class="legend-divider"></div>
         <div class="legend-title">STATUS</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#64748b"></span> Waiting</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;box-shadow:0 0 6px #f59e0b"></span> Moving</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#10b981;opacity:0.4"></span> Passed</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> Racing</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#10b981;opacity:0.4"></span> Finished</div>
       `;
       return div;
     };
@@ -387,22 +387,18 @@ class ShipTracker {
 
   createShipIcon(ship, participant, isClose) {
     const isPassed = !!this.state.passed[ship.imo];
-    const isMoving = !!this.state.moving[ship.imo];
 
-    let borderGlow = "";
     let opacity = "";
     const size = isClose && !isPassed ? 40 : 32;
     const closeClass = isClose && !isPassed ? " close-ship" : "";
 
     if (isPassed) {
       opacity = "opacity:0.35;";
-    } else if (isMoving) {
-      borderGlow = "box-shadow:0 0 12px 4px rgba(245,158,11,0.7);";
     }
 
     return L.divIcon({
       className: "ship-marker",
-      html: `<div class="ship-icon${closeClass}" style="background:${participant.color};${opacity}${borderGlow}width:${size}px;height:${size}px;">
+      html: `<div class="ship-icon${closeClass}" style="background:${participant.color};${opacity}width:${size}px;height:${size}px;">
         <span class="ship-icon-text">${ship.name.substring(0, 2).toUpperCase()}</span>
       </div>`,
       iconSize: [size, size],
@@ -412,11 +408,10 @@ class ShipTracker {
 
   createShipPopup(ship, participant) {
     const isPassed = !!this.state.passed[ship.imo];
-    const isMoving = !!this.state.moving[ship.imo];
     const pos = this.state.positions[ship.imo];
     const distance = this.distanceCache[ship.imo];
-    const status = isPassed ? "PASSED" : isMoving ? "MOVING" : "WAITING";
-    const statusColor = isPassed ? "#10b981" : isMoving ? "#f59e0b" : "#64748b";
+    const status = isPassed ? "FINISHED" : "RACING";
+    const statusColor = isPassed ? "#10b981" : "#3b82f6";
 
     return `<div style="min-width:180px">
       <div style="font-size:15px;font-weight:700;margin-bottom:4px">${ship.name}</div>
@@ -634,11 +629,7 @@ class ShipTracker {
         <div class="score-dots">
           ${p.ships
             .map((s) => {
-              const status = this.state.passed[s.imo]
-                ? "passed"
-                : this.state.moving[s.imo]
-                  ? "moving"
-                  : "waiting";
+              const status = this.state.passed[s.imo] ? "passed" : "racing";
               return `<div class="progress-dot ${status}" title="${s.name}"></div>`;
             })
             .join("")}
@@ -661,7 +652,7 @@ class ShipTracker {
 
     if (!this.state.raceLog || this.state.raceLog.length === 0) {
       container.innerHTML =
-        '<div class="log-empty">No events yet. Mark a ship as passed to see activity here.</div>';
+        '<div class="log-empty">No events yet. Ships will appear here as they cross the finish line.</div>';
       return;
     }
 
@@ -709,7 +700,6 @@ class ShipTracker {
           participant: p,
           distance: this.distanceCache[s.imo] || Infinity,
           isPassed: !!this.state.passed[s.imo],
-          isMoving: !!this.state.moving[s.imo],
           passedTime: this.state.passed[s.imo]?.timestamp,
         });
       });
@@ -734,25 +724,14 @@ class ShipTracker {
   renderShipListFlat(allShips, distanceRank) {
     const container = document.getElementById("ship-list");
 
-    // Sort
-    if (this.sortBy === "distance") {
-      allShips.sort((a, b) => {
-        if (a.isPassed && !b.isPassed) return 1;
-        if (!a.isPassed && b.isPassed) return -1;
-        if (a.isPassed && b.isPassed)
-          return a.passedTime - b.passedTime;
-        return a.distance - b.distance;
-      });
-    } else if (this.sortBy === "status") {
-      allShips.sort((a, b) => {
-        const order = (s) => (s.isPassed ? 0 : s.isMoving ? 1 : 2);
-        const diff = order(a) - order(b);
-        if (diff !== 0) return diff;
-        if (a.isPassed && b.isPassed)
-          return a.passedTime - b.passedTime;
-        return a.distance - b.distance;
-      });
-    }
+    // Sort by distance (finished ships last, ordered by finish time)
+    allShips.sort((a, b) => {
+      if (a.isPassed && !b.isPassed) return 1;
+      if (!a.isPassed && b.isPassed) return -1;
+      if (a.isPassed && b.isPassed)
+        return a.passedTime - b.passedTime;
+      return a.distance - b.distance;
+    });
 
     allShips.forEach((entry) => {
       container.appendChild(
@@ -794,17 +773,17 @@ class ShipTracker {
   }
 
   createShipCardElement(entry, distanceRank, showOwner) {
-    const { ship, participant, distance, isPassed, isMoving } = entry;
+    const { ship, participant, distance, isPassed } = entry;
     const flagEmoji = FLAG_EMOJIS[ship.flag] || "\u{1F3F4}";
     const rank = distanceRank[ship.imo];
     const finishPos = isPassed ? this.getFinishPosition(ship.imo) : null;
 
     const card = document.createElement("div");
-    card.className = `ship-card ${isPassed ? "ship-passed" : isMoving ? "ship-moving" : "ship-waiting"}`;
+    card.className = `ship-card ${isPassed ? "ship-passed" : ""}`;
 
     card.innerHTML = `
       <div class="ship-card-main">
-        <div class="ship-status-indicator ${isPassed ? "passed" : isMoving ? "moving" : "waiting"}"></div>
+        <div class="ship-status-indicator ${isPassed ? "passed" : "racing"}"></div>
         <div class="ship-details">
           <div class="ship-name-row">
             <span class="ship-name">${ship.name}</span>
@@ -828,24 +807,6 @@ class ShipTracker {
           </div>
           ${isPassed ? `<div class="ship-passed-time">Crossed: ${new Date(this.state.passed[ship.imo].timestamp).toLocaleString()}</div>` : ""}
         </div>
-        <div class="ship-actions">
-          ${
-            !isPassed
-              ? `
-            <button class="btn btn-move ${isMoving ? "active" : ""}" onclick="tracker.toggleMoving('${ship.imo}')" title="Toggle moving">
-              ${isMoving ? "MOVING" : "WAIT"}
-            </button>
-            <button class="btn btn-pass" onclick="tracker.markPassed('${ship.imo}')" title="Mark as passed">
-              PASSED
-            </button>
-          `
-              : `
-            <button class="btn btn-undo" onclick="tracker.undoPassed('${ship.imo}')" title="Undo passed">
-              UNDO
-            </button>
-          `
-          }
-        </div>
       </div>
     `;
 
@@ -861,65 +822,64 @@ class ShipTracker {
   }
 
   // ============================================
-  // SHIP ACTIONS
+  // AUTO-DETECT FINISH CROSSINGS
   // ============================================
 
-  toggleMoving(imo) {
-    if (this.state.moving[imo]) {
-      delete this.state.moving[imo];
-    } else {
-      this.state.moving[imo] = true;
-    }
-    this.saveState();
-    this.refresh();
-  }
+  checkFinishCrossings() {
+    const FINISH_LNG = 56.42;
+    const newCrossings = [];
 
-  markPassed(imo) {
-    const finishedCount = Object.keys(this.state.passed).length;
-    const position = finishedCount + 1;
-
-    this.state.passed[imo] = { timestamp: Date.now() };
-    delete this.state.moving[imo];
-
-    const info = this.getShipInfo(imo);
-
-    // Race log entry
-    this.addRaceLogEntry({
-      type: "crossed",
-      imo,
-      shipName: info.shipName,
-      ownerName: info.ownerName,
-      ownerColor: info.ownerColor,
-      position,
-      timestamp: Date.now(),
+    PARTICIPANTS.forEach((p) => {
+      p.ships.forEach((s) => {
+        if (this.state.passed[s.imo]) return;
+        const pos = this.state.positions[s.imo];
+        if (!pos) return;
+        if (pos.lng >= FINISH_LNG) {
+          newCrossings.push({ imo: s.imo, lng: pos.lng });
+        }
+      });
     });
 
-    this.saveState();
-    this.refresh();
+    if (newCrossings.length === 0) return;
 
-    // Celebration for top 5
-    if (position <= 5) {
-      this.triggerCelebration(info, position);
-    } else {
-      this.showNotification(imo);
+    // Order simultaneous crossings by longitude (further east = crossed first)
+    newCrossings.sort((a, b) => b.lng - a.lng);
+
+    let needsRefresh = false;
+    newCrossings.forEach((crossing) => {
+      const position = Object.keys(this.state.passed).length + 1;
+      this.state.passed[crossing.imo] = { timestamp: Date.now() };
+
+      const info = this.getShipInfo(crossing.imo);
+
+      this.addRaceLogEntry({
+        type: "crossed",
+        imo: crossing.imo,
+        shipName: info.shipName,
+        ownerName: info.ownerName,
+        ownerColor: info.ownerColor,
+        position,
+        timestamp: Date.now(),
+      });
+
+      needsRefresh = true;
+
+      // Celebration for top 5, notification for others
+      if (position <= 5) {
+        setTimeout(() => this.triggerCelebration(info, position), (position - 1) * 500);
+      } else {
+        this.showNotification(crossing.imo);
+      }
+    });
+
+    if (needsRefresh) {
+      this.saveState();
+
+      // Detect winner if 5+ have finished
+      if (Object.keys(this.state.passed).length >= 5) {
+        setTimeout(() => this.detectWinner(), 3500);
+      }
     }
-
-    // Winner detection
-    if (position >= 5) {
-      setTimeout(() => this.detectWinner(), 3500);
-    }
-  }
-
-  undoPassed(imo) {
-    delete this.state.passed[imo];
-    // Remove from race log
-    this.state.raceLog = (this.state.raceLog || []).filter(
-      (e) => !(e.type === "crossed" && e.imo === imo)
-    );
-    this.saveState();
-    this.refresh();
-    // Hide winner banner if applicable
-    document.getElementById("winner-banner").style.display = "none";
   }
 
   locateShip(imo) {
@@ -1177,6 +1137,7 @@ class ShipTracker {
     }
 
     this.saveState();
+    this.checkFinishCrossings();
     this.refresh();
 
     const now = new Date();
@@ -1184,9 +1145,8 @@ class ShipTracker {
     btn.disabled = false;
     btn.textContent = "Refresh";
 
-    setTimeout(() => {
-      statusEl.style.display = "none";
-    }, 10000);
+    // Reset auto-refresh countdown
+    this.resetAutoRefreshCountdown();
   }
 
   async fetchShipPosition(ship) {
@@ -1235,7 +1195,6 @@ class ShipTracker {
       this.state = {
         passed: {},
         positions: {},
-        moving: {},
         raceLog: [],
       };
       this.ensureAllPositions();
@@ -1243,6 +1202,35 @@ class ShipTracker {
       document.getElementById("winner-banner").style.display = "none";
       this.refresh();
     }
+  }
+
+  // ============================================
+  // AUTO-REFRESH TIMER
+  // ============================================
+
+  startAutoRefresh() {
+    const INTERVAL = 5 * 60; // 5 minutes in seconds
+    this.autoRefreshRemaining = INTERVAL;
+
+    // Update countdown every second
+    this.autoRefreshCountdown = setInterval(() => {
+      this.autoRefreshRemaining--;
+      const statusEl = document.getElementById("refresh-status");
+
+      if (this.autoRefreshRemaining <= 0) {
+        this.autoRefreshRemaining = INTERVAL;
+        this.refreshPositions();
+      } else {
+        const min = Math.floor(this.autoRefreshRemaining / 60);
+        const sec = this.autoRefreshRemaining % 60;
+        statusEl.textContent = `Auto-refresh in ${min}:${sec.toString().padStart(2, "0")}`;
+        statusEl.style.display = "block";
+      }
+    }, 1000);
+  }
+
+  resetAutoRefreshCountdown() {
+    this.autoRefreshRemaining = 5 * 60;
   }
 }
 
