@@ -133,15 +133,13 @@ const HORMUZ = {
 // Finish line target point (center of gate line, where the label is)
 const FINISH_LINE = { lat: 25.94, lng: 56.8 };
 
-// Musandam Peninsula obstacle (simplified triangle for land-avoidance routing)
-const MUSANDAM_POLYGON = [
-  [25.85, 55.95],  // Southwest base
-  [26.4, 56.27],   // Tip (north)
-  [25.85, 56.35],  // Southeast base
+// Actual eastbound shipping lane through the Strait of Hormuz (TSS)
+// Based on key landmarks: Greater Tunb Island, Musandam, and Quoin Island
+const SHIPPING_LANE = [
+  { lat: 26.12, lng: 55.3 },   // South of Greater Tunb (26.25N,55.27E), eastbound lane
+  { lat: 26.34, lng: 56.0 },   // Mid-strait, between Musandam and Iran
+  { lat: 26.52, lng: 56.52 },  // Quoin Island (26.50N,56.52E) - traditional exit point
 ];
-
-// Waypoint for routing through the Strait of Hormuz (well north+east of Musandam)
-const STRAIT_WAYPOINT = { lat: 26.7, lng: 56.5 };
 
 // Flag emoji mapping
 const FLAG_EMOJIS = {

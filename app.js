@@ -138,49 +138,30 @@ class ShipTracker {
     return R * c;
   }
 
-  // Check if two line segments intersect (using lng as x, lat as y)
-  segmentsIntersect(ax, ay, bx, by, cx, cy, dx, dy) {
-    const det = (bx - ax) * (dy - cy) - (by - ay) * (dx - cx);
-    if (Math.abs(det) < 1e-10) return false;
-    const t = ((cx - ax) * (dy - cy) - (cy - ay) * (dx - cx)) / det;
-    const u = ((cx - ax) * (by - ay) - (cy - ay) * (bx - ax)) / det;
-    return t > 0 && t < 1 && u > 0 && u < 1;
-  }
-
-  // Check if a direct path between two points crosses the Musandam Peninsula
-  pathCrossesLand(lat1, lng1, lat2, lng2) {
-    for (let i = 0; i < MUSANDAM_POLYGON.length; i++) {
-      const j = (i + 1) % MUSANDAM_POLYGON.length;
-      if (
-        this.segmentsIntersect(
-          lng1, lat1, lng2, lat2,
-          MUSANDAM_POLYGON[i][1], MUSANDAM_POLYGON[i][0],
-          MUSANDAM_POLYGON[j][1], MUSANDAM_POLYGON[j][0]
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   // Get the route waypoints from a ship to the finish line
+  // Ships in the Persian Gulf route through the actual eastbound shipping lane
   getRouteToFinish(imo) {
     const pos = this.state.positions[imo];
     if (!pos) return null;
 
-    if (this.pathCrossesLand(pos.lat, pos.lng, FINISH_LINE.lat, FINISH_LINE.lng)) {
+    // Ships already past the strait exit go direct
+    const lastWp = SHIPPING_LANE[SHIPPING_LANE.length - 1];
+    if (pos.lng >= lastWp.lng) {
       return [
         [pos.lat, pos.lng],
-        [STRAIT_WAYPOINT.lat, STRAIT_WAYPOINT.lng],
         [FINISH_LINE.lat, FINISH_LINE.lng],
       ];
     }
 
-    return [
-      [pos.lat, pos.lng],
-      [FINISH_LINE.lat, FINISH_LINE.lng],
-    ];
+    // Route through shipping lane waypoints that are ahead of the ship
+    const route = [[pos.lat, pos.lng]];
+    for (const wp of SHIPPING_LANE) {
+      if (wp.lng > pos.lng) {
+        route.push([wp.lat, wp.lng]);
+      }
+    }
+    route.push([FINISH_LINE.lat, FINISH_LINE.lng]);
+    return route;
   }
 
   getDistanceToFinish(imo) {
