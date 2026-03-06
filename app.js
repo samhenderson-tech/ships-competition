@@ -637,7 +637,7 @@ class ShipTracker {
       `;
 
       card.addEventListener("click", () =>
-        this.scrollToParticipant(p.name)
+        this.showParticipantShips(p.name)
       );
       container.appendChild(card);
     });
@@ -815,7 +815,7 @@ class ShipTracker {
       const header = document.createElement("div");
       header.className = "participant-header";
       header.style.borderLeftColor = p.color;
-      header.innerHTML = `<h3 style="color:${p.color}">${p.name}</h3>`;
+      header.innerHTML = `<h3><a href="#" style="color:${p.color};text-decoration:none" onclick="event.preventDefault();tracker.showParticipantShips('${p.name}')">${p.name}</a></h3>`;
       section.appendChild(header);
 
       const shipsDiv = document.createElement("div");
@@ -864,7 +864,7 @@ class ShipTracker {
           </div>
           <div class="ship-meta">
             ${flagEmoji} ${ship.flag}
-            ${showOwner ? ` &middot; <span style="color:${participant.color};font-weight:600">${participant.name}</span>` : ""}
+            ${showOwner ? ` &middot; <a href="#" class="ship-link" style="color:${participant.color};font-weight:600" onclick="event.preventDefault();tracker.showParticipantShips('${participant.name}')">${participant.name}</a>` : ""}
             &middot; <a href="https://www.marinetraffic.com/en/ais/details/ships/imo:${ship.imo}" target="_blank" class="ship-link">Track</a>
             &middot; <a href="#" class="ship-link" onclick="event.preventDefault();tracker.locateShip('${ship.imo}')">Locate</a>
             ${!isPassed && rank ? ` &middot; <span class="ship-rank">#${rank} closest</span>` : ""}
@@ -961,10 +961,36 @@ class ShipTracker {
     }
   }
 
-  scrollToParticipant(name) {
-    const el = document.getElementById(`participant-${name}`);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+  showParticipantShips(name) {
+    const participant = PARTICIPANTS.find((p) => p.name === name);
+    if (!participant) return;
+
+    // Close all existing popups
+    Object.values(this.markers).forEach((m) => m.closePopup());
+
+    // Collect positions and open popups for this participant's ships
+    const bounds = [];
+    participant.ships.forEach((s) => {
+      const pos = this.state.positions[s.imo];
+      if (pos && this.markers[s.imo]) {
+        bounds.push([pos.lat, pos.lng]);
+        this.markers[s.imo].openPopup();
+      }
+    });
+
+    if (bounds.length === 0) return;
+
+    // Fit map to show all their ships
+    if (bounds.length === 1) {
+      this.map.setView(bounds[0], 10, { animate: true });
+    } else {
+      this.map.fitBounds(bounds, { padding: [50, 50], animate: true, maxZoom: 10 });
+    }
+
+    // Switch to map tab on mobile
+    const mapTab = document.querySelector('.tab[data-tab="map"]');
+    if (mapTab && window.innerWidth <= 768) {
+      mapTab.click();
     }
   }
 
