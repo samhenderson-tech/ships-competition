@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hormuz Strait Race - Ship Tracker</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div>
+        <div class="logo">HORMUZ RACE</div>
+        <div class="logo-sub">Strait of Hormuz Ship Competition</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div id="clock"></div>
+      <div class="header-actions">
+        <button class="header-btn refresh-btn" id="refresh-btn" onclick="tracker.refreshPositions()">Refresh Positions</button>
+        <button class="header-btn" onclick="tracker.exportState()">Export</button>
+        <button class="header-btn" onclick="document.getElementById('import-file').click()">Import</button>
+        <button class="header-btn" onclick="tracker.resetAll()">Reset</button>
+        <input type="file" id="import-file" accept=".json" onchange="tracker.importState(this.files[0])">
+      </div>
+      <div id="refresh-status" class="refresh-status" style="display:none"></div>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value total-val" id="total-ships">35</div>
+      <div class="stat-label">Total Ships</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value passed-val" id="total-passed">0</div>
+      <div class="stat-label">Passed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value moving-val" id="total-moving">0</div>
+      <div class="stat-label">Moving</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value waiting-val" id="total-waiting">35</div>
+      <div class="stat-label">Waiting</div>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    <!-- Sidebar: Scoreboard -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Leaderboard</div>
+      <div id="scoreboard"></div>
+    </aside>
+
+    <!-- Content: Map + Ship List -->
+    <main class="content">
+      <div id="map"></div>
+      <div class="ship-list-container">
+        <div class="ship-list-header">
+          <div class="ship-list-title">All Ships</div>
+        </div>
+        <div id="ship-list"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- App scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
