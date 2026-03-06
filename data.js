@@ -37,7 +37,7 @@ const PARTICIPANTS = [
     name: "Albert",
     color: "#f39c12",
     ships: [
-      { name: "Maria", flag: "Saudi Arabia", imo: "9917828" },
+      { name: "Maria", flag: "Saudi Arabia", imo: "1120510" },
       { name: "Sands", flag: "Gambia", imo: "9220940" },
       { name: "Ocean Lily", flag: "Hong Kong", imo: "9284960" },
       { name: "Advantage Victory", flag: "Marshall Islands", imo: "9933547" },
@@ -109,7 +109,7 @@ const REAL_POSITIONS = {
   "9832262": { lat: 25.54406, lng: 54.90227 },  // Front Shanghai
   "9833735": { lat: 24.52852, lng: 53.58895 },  // Siena
   "9903413": { lat: 25.98660, lng: 55.50498 },  // Karachi
-  "9917828": { lat: 1.26680, lng: 103.58439 },   // Maria (Singapore area)
+  "1120510": { lat: 24.82110, lng: 56.73327 },    // Maria
   "9933547": { lat: 28.71129, lng: 49.30036 },  // Advantage Victory
   "9936549": { lat: 26.01413, lng: 52.71321 },  // Eco Oracle
   "9937103": { lat: 25.62021, lng: 54.98053 },  // Front Beauly

@@ -10,7 +10,7 @@ class ShipTracker {
   }
 
   loadState() {
-    const DATA_VERSION = 3; // Bump to force position refresh
+    const DATA_VERSION = 4; // Bump to force position refresh
     const saved = localStorage.getItem("hormuz-race-state");
     if (saved) {
       const state = JSON.parse(saved);
