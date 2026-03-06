@@ -109,7 +109,7 @@ const REAL_POSITIONS = {
   "9832262": { lat: 25.54406, lng: 54.90227 },  // Front Shanghai
   "9833735": { lat: 24.52852, lng: 53.58895 },  // Siena
   "9903413": { lat: 25.98660, lng: 55.50498 },  // Karachi
-  "1120510": { lat: 24.82110, lng: 56.73327 },    // Maria
+  "1120510": { lat: 25.961, lng: 56.054 },          // Maria (Mina Saqr, RAK)
   "9933547": { lat: 28.71129, lng: 49.30036 },  // Advantage Victory
   "9936549": { lat: 26.01413, lng: 52.71321 },  // Eco Oracle
   "9937103": { lat: 25.62021, lng: 54.98053 },  // Front Beauly
