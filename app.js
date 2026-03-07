@@ -435,14 +435,42 @@ class ShipTracker {
   placeAllShips() {
     const closeImos = this.getClosestUnpassedImos(5);
 
+    // Detect overlapping positions and offset them
+    const posKey = (lat, lng) => `${lat.toFixed(3)},${lng.toFixed(3)}`;
+    const seen = {};
+    const offsets = {};
+    const OFFSET = 0.015; // ~1.5km offset for overlapping ships
+    const ANGLE_STEP = (2 * Math.PI) / 6;
+
+    PARTICIPANTS.forEach((p) => {
+      p.ships.forEach((s) => {
+        const pos = this.state.positions[s.imo];
+        if (!pos) return;
+        const key = posKey(pos.lat, pos.lng);
+        if (!seen[key]) {
+          seen[key] = [];
+        }
+        seen[key].push(s.imo);
+      });
+    });
+
+    Object.values(seen).forEach((imos) => {
+      if (imos.length < 2) return;
+      imos.forEach((imo, i) => {
+        const angle = i * ANGLE_STEP;
+        offsets[imo] = { lat: Math.cos(angle) * OFFSET, lng: Math.sin(angle) * OFFSET };
+      });
+    });
+
     PARTICIPANTS.forEach((participant) => {
       participant.ships.forEach((ship) => {
         const pos = this.state.positions[ship.imo];
         if (!pos) return;
 
+        const off = offsets[ship.imo] || { lat: 0, lng: 0 };
         const isClose = closeImos.has(ship.imo);
         const icon = this.createShipIcon(ship, participant, isClose);
-        const marker = L.marker([pos.lat, pos.lng], { icon })
+        const marker = L.marker([pos.lat + off.lat, pos.lng + off.lng], { icon })
           .addTo(this.map)
           .bindPopup(this.createShipPopup(ship, participant));
 
