@@ -62,21 +62,32 @@ async function fetchWithTimeout(url, timeoutMs = 15000) {
   }
 }
 
+// Direct vessel page URLs for ships where IMO search doesn't find them
+const DIRECT_URLS = {
+  "1120510": "/vessels/maria-mmsi-671536100-imo-1120510",
+  "9065077": "/vessels/sea-bird-mmsi-370172000-imo-9065077",
+};
+
 async function fetchShipPosition(imo, name) {
-  const searchName = name.replace(/ /g, "+");
-  const searchUrl = `https://www.myshiptracking.com/vessels?name=${searchName}&imo=${imo}`;
-
   try {
-    const searchResp = await fetchWithTimeout(searchUrl);
-    if (!searchResp.ok) return null;
-    const searchHtml = await searchResp.text();
+    let vesselPath = DIRECT_URLS[imo];
 
-    const linkMatch = searchHtml.match(
-      new RegExp(`href="(/vessels/[^"]*imo-${imo}[^"]*)"`)
-    );
-    if (!linkMatch) return null;
+    // Try search if no direct URL
+    if (!vesselPath) {
+      const searchName = name.replace(/ /g, "+");
+      const searchUrl = `https://www.myshiptracking.com/vessels?name=${searchName}&imo=${imo}`;
+      const searchResp = await fetchWithTimeout(searchUrl);
+      if (!searchResp.ok) return null;
+      const searchHtml = await searchResp.text();
 
-    const vesselUrl = `https://www.myshiptracking.com${linkMatch[1]}`;
+      const linkMatch = searchHtml.match(
+        new RegExp(`href="(/vessels/[^"]*imo-${imo}[^"]*)"`)
+      );
+      if (!linkMatch) return null;
+      vesselPath = linkMatch[1];
+    }
+
+    const vesselUrl = `https://www.myshiptracking.com${vesselPath}`;
     const vesselResp = await fetchWithTimeout(vesselUrl);
     if (!vesselResp.ok) return null;
     const vesselHtml = await vesselResp.text();
