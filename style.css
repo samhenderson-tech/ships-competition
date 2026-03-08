@@ -951,6 +951,12 @@ body {
   margin-top: 2px;
 }
 
+.ship-last-update {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
 .ship-rank {
   font-size: 10px;
   font-weight: 700;

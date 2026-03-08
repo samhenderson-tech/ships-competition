@@ -80,6 +80,7 @@ class ShipTracker {
               lng: real.lng,
               speed: real.speed || 0,
               course: real.course || 0,
+              lastUpdate: this.state.positions[s.imo]?.lastUpdate || Date.now(),
             };
             this.appendPositionHistory(s.imo, real.lat, real.lng);
             changed = true;
@@ -224,6 +225,18 @@ class ShipTracker {
     );
     const idx = sorted.findIndex(([id]) => id === imo);
     return idx >= 0 ? idx + 1 : null;
+  }
+
+  timeAgo(timestamp) {
+    if (!timestamp) return "unknown";
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    if (seconds < 60) return "just now";
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ${minutes % 60}m ago`;
+    const days = Math.floor(hours / 24);
+    return `${days}d ${hours % 24}h ago`;
   }
 
   ordinal(n) {
@@ -456,6 +469,7 @@ class ShipTracker {
           : ""
       }
       ${pos ? `<div style="font-size:11px;color:#64748b;margin-top:4px">${pos.lat.toFixed(4)}N, ${pos.lng.toFixed(4)}E</div>` : ""}
+      ${pos?.lastUpdate ? `<div style="font-size:11px;color:#64748b;margin-top:2px">Updated: ${this.timeAgo(pos.lastUpdate)}</div>` : ""}
     </div>`;
   }
 
@@ -957,6 +971,7 @@ class ShipTracker {
             ${!isPassed && rank ? ` &middot; <span class="ship-rank">#${rank} closest</span>` : ""}
           </div>
           ${isPassed ? `<div class="ship-passed-time">Crossed: ${new Date(this.state.passed[ship.imo].timestamp).toLocaleString()}</div>` : ""}
+          ${!isPassed && this.state.positions[ship.imo]?.lastUpdate ? `<div class="ship-last-update">Updated: ${this.timeAgo(this.state.positions[ship.imo].lastUpdate)}</div>` : ""}
         </div>
       </div>
     `;
