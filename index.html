@@ -14,7 +14,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- App styles -->
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -65,6 +65,7 @@
     <button class="tab" data-tab="map">Map</button>
     <button class="tab" data-tab="ships">Ships</button>
     <button class="tab" data-tab="log">Log</button>
+    <button class="tab" data-tab="updated">Updated</button>
   </div>
 
   <!-- Main 3-Column Layout -->
@@ -100,6 +101,12 @@
     <div id="ship-list"></div>
   </div>
 
+  <!-- Updated List -->
+  <div class="updated-list-section panel" id="panel-updated">
+    <div class="panel-title">Last Updated</div>
+    <div id="updated-list"></div>
+  </div>
+
   <!-- Confetti Canvas -->
   <canvas id="confetti-canvas"></canvas>
 
@@ -130,11 +137,11 @@
           delete document.body.dataset.locked;
           // Load app scripts
           var s1 = document.createElement("script");
-          s1.src = "data.js?v=8";
+          s1.src = "data.js?v=9";
           document.body.appendChild(s1);
           s1.onload = function() {
             var s2 = document.createElement("script");
-            s2.src = "app.js?v=8";
+            s2.src = "app.js?v=9";
             document.body.appendChild(s2);
           };
         } else {
@@ -154,8 +161,8 @@
   <!-- App scripts (loaded by gate if not already authenticated) -->
   <script>
     if (!document.body.dataset.locked) {
-      document.write('<scr' + 'ipt src="data.js?v=8"><\/scr' + 'ipt>');
-      document.write('<scr' + 'ipt src="app.js?v=8"><\/scr' + 'ipt>');
+      document.write('<scr' + 'ipt src="data.js?v=9"><\/scr' + 'ipt>');
+      document.write('<scr' + 'ipt src="app.js?v=9"><\/scr' + 'ipt>');
     }
   </script>
 </body>

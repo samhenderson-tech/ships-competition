@@ -259,6 +259,7 @@ class ShipTracker {
     this.renderClosestShip();
     this.renderLeaderboard();
     this.renderShipList();
+    this.renderUpdatedList();
     this.renderRaceLog();
     this.detectWinner();
     this.initMobileTabs();
@@ -273,6 +274,7 @@ class ShipTracker {
       map: "panel-map",
       ships: "panel-ships",
       log: "panel-log",
+      updated: "panel-updated",
     };
 
     // Set initial active panel
@@ -988,6 +990,55 @@ class ShipTracker {
   }
 
   // ============================================
+  // UPDATED LIST (sorted by last update time)
+  // ============================================
+
+  renderUpdatedList() {
+    const container = document.getElementById("updated-list");
+    if (!container) return;
+
+    const allShips = [];
+    PARTICIPANTS.forEach((p) => {
+      p.ships.forEach((s) => {
+        const pos = this.state.positions[s.imo];
+        allShips.push({
+          ship: s,
+          participant: p,
+          lastUpdate: pos?.lastUpdate || null,
+        });
+      });
+    });
+
+    // Sort by lastUpdate descending (most recent first), nulls at bottom
+    allShips.sort((a, b) => {
+      if (!a.lastUpdate && !b.lastUpdate) return 0;
+      if (!a.lastUpdate) return 1;
+      if (!b.lastUpdate) return -1;
+      return b.lastUpdate - a.lastUpdate;
+    });
+
+    container.innerHTML = allShips
+      .map((entry) => {
+        const { ship, participant, lastUpdate } = entry;
+        const flagEmoji = FLAG_EMOJIS[ship.flag] || "\u{1F3F4}";
+        const timeStr = lastUpdate ? this.timeAgo(lastUpdate) : "never";
+        const isStale = !lastUpdate || (Date.now() - lastUpdate) > 24 * 60 * 60 * 1000;
+        const timeClass = isStale ? "update-stale" : "update-fresh";
+
+        return `
+          <div class="updated-row">
+            <div class="updated-ship">
+              <span class="updated-dot" style="background:${participant.color}"></span>
+              ${flagEmoji} ${ship.name}
+            </div>
+            <div class="updated-owner" style="color:${participant.color}">${participant.name}</div>
+            <div class="updated-time ${timeClass}">${timeStr}</div>
+          </div>`;
+      })
+      .join("");
+  }
+
+  // ============================================
   // AUTO-DETECT FINISH CROSSINGS
   // ============================================
 
@@ -1328,6 +1379,7 @@ class ShipTracker {
     this.renderClosestShip();
     this.renderLeaderboard();
     this.renderShipList();
+    this.renderUpdatedList();
     this.renderRaceLog();
     this.updateMapMarkers();
   }

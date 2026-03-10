@@ -1001,6 +1001,72 @@ body {
 
 
 /* ============================================
+   UPDATED LIST
+   ============================================ */
+.updated-list-section {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.updated-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border-radius: 6px;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.updated-row:hover {
+  background: var(--bg-card-hover);
+}
+
+.updated-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.updated-ship {
+  flex: 1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.updated-owner {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+.updated-time {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  min-width: 90px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.update-fresh {
+  color: var(--passed);
+}
+
+.update-stale {
+  color: var(--danger);
+}
+
+/* ============================================
    CONFETTI CANVAS
    ============================================ */
 #confetti-canvas {
@@ -1203,7 +1269,8 @@ body {
     padding: 12px;
   }
 
-  .ship-list-section.active {
+  .ship-list-section.active,
+  .updated-list-section.active {
     display: block;
   }
 
