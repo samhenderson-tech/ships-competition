@@ -30,7 +30,7 @@ const PARTICIPANTS = [
       { name: "Spade", flag: "Cameroon", imo: "1137745", mmsi: "613701904" },
       { name: "Auroura", flag: "Panama", imo: "9262912", mmsi: "352001225" },
       { name: "Lan Jing", flag: "Curaçao", imo: "9288095", mmsi: "306254000" },
-      { name: "North Star", flag: "Barbados", imo: "9299563" },
+      { name: "North Star", flag: "Barbados", imo: "9299563", mmsi: "314109000" },
     ],
   },
   {
@@ -38,7 +38,7 @@ const PARTICIPANTS = [
     color: "#f39c12",
     ships: [
       { name: "Maria", flag: "Saudi Arabia", imo: "1120510", mmsi: "671536100" },
-      { name: "Sands", flag: "Gambia", imo: "9220940" },
+      { name: "Sands", flag: "Gambia", imo: "9220940", mmsi: "629009382" },
       { name: "Ocean Lily", flag: "Hong Kong", imo: "9284960", mmsi: "477178100" },
       { name: "Advantage Victory", flag: "Marshall Islands", imo: "9933547", mmsi: "538010019" },
       { name: "Lebrethah", flag: "Liberia", imo: "9976927", mmsi: "636024681" },
@@ -59,7 +59,7 @@ const PARTICIPANTS = [
     name: "Viraj",
     color: "#1abc9c",
     ships: [
-      { name: "Stoic Warrior", flag: "Liberia", imo: "1028762" },
+      { name: "Stoic Warrior", flag: "Liberia", imo: "1028762", mmsi: "636024896" },
       { name: "Pine Gas", flag: "India", imo: "9315680", mmsi: "419001655" },
       { name: "Galaxy Gas", flag: "Haiti", imo: "9174361", mmsi: "336897910" },
       { name: "Front Shanghai", flag: "Hong Kong", imo: "9832262", mmsi: "477539300" },
@@ -107,9 +107,9 @@ const REAL_POSITIONS = {
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
   "9262912": { lat: 25.65832, lng: 54.77486 },  // Auroura
   "9288095": { lat: 26.02737, lng: 54.29837 },  // Lan Jing
-  "9299563": { lat: 26.15237, lng: 55.38628 },  // North Star
+  "9299563": { lat: 38.12080, lng: 48.92448 },  // North Star
   "1120510": { lat: 25.83812, lng: 55.45175 },  // Maria
-  "9220940": { lat: 26.07955, lng: 55.78936 },  // Sands
+  "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
   "9284960": { lat: 26.16831, lng: 52.76727 },  // Ocean Lily
   "9933547": { lat: 28.71062, lng: 49.30012 },  // Advantage Victory
   "9976927": { lat: 25.91981, lng: 52.31916 },  // Lebrethah
@@ -118,7 +118,7 @@ const REAL_POSITIONS = {
   "9750050": { lat: 25.89838, lng: 55.50021 },  // Diligent Warrior
   "9251585": { lat: 25.82967, lng: 53.41048 },  // Nature Heart
   "9254850": { lat: 25.91100, lng: 55.49933 },  // Camilla
-  "1028762": { lat: 25.92227, lng: 55.49429 },  // Stoic Warrior
+  "1028762": { lat: 25.89703, lng: 55.50449 },  // Stoic Warrior
   "9315680": { lat: 25.90475, lng: 55.49840 },  // Pine Gas
   "9174361": { lat: 25.89968, lng: 55.50549 },  // Galaxy Gas
   "9832262": { lat: 25.91629, lng: 55.49703 },  // Front Shanghai

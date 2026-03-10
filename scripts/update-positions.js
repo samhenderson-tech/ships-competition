@@ -23,9 +23,9 @@ const SHIPS = [
   ["1137745", "Spade", "613701904"],
   ["9262912", "Auroura", "352001225"],
   ["9288095", "Lan Jing", "306254000"],
-  ["9299563", "North Star", null],
+  ["9299563", "North Star", "314109000"],
   ["1120510", "Maria", "671536100"],
-  ["9220940", "Sands", null],
+  ["9220940", "Sands", "629009382"],
   ["9284960", "Ocean Lily", "477178100"],
   ["9933547", "Advantage Victory", "538010019"],
   ["9976927", "Lebrethah", "636024681"],
@@ -34,7 +34,7 @@ const SHIPS = [
   ["9750050", "Diligent Warrior", "241422000"],
   ["9251585", "Nature Heart", "650000171"],
   ["9254850", "Camilla", "477223400"],
-  ["1028762", "Stoic Warrior", null],
+  ["1028762", "Stoic Warrior", "636024896"],
   ["9315680", "Pine Gas", "419001655"],
   ["9174361", "Galaxy Gas", "336897910"],
   ["9832262", "Front Shanghai", "477539300"],
@@ -78,7 +78,7 @@ async function fetchFromVesselFinder(mmsi, name) {
 
     const arrayBuf = await resp.arrayBuffer();
     const buf = Buffer.from(arrayBuf);
-    if (buf.length < 12) return null;
+    if (buf.length < 12 || buf.length > 100) return null;
 
     const CF = 600000;
     const lat = buf.readInt32BE(7) / CF;

@@ -1456,7 +1456,7 @@ class ShipTracker {
     if (!resp.ok) return null;
 
     const buf = await resp.arrayBuffer();
-    if (buf.byteLength < 12) return null;
+    if (buf.byteLength < 12 || buf.byteLength > 100) return null;
 
     const view = new DataView(buf);
     const CF = 600000;
