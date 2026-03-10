@@ -128,7 +128,7 @@ const REAL_POSITIONS = {
   "9410399": { lat: 25.91243, lng: 55.48951 },  // Serifos
   "9626285": { lat: 25.58208, lng: 53.73116 },  // GasLog Skagen
   "9718777": { lat: 25.75842, lng: 52.95880 },  // Mahadah Silver
-  "9593517": { lat: 25.89098, lng: 55.41337 },  // Safeen Prestige
+  "9593517": { lat: 26.45712, lng: 56.41000 },  // Safeen Prestige (disabled - missile strike Mar 4)
   "9325049": { lat: 29.56028, lng: 48.84260 },  // Sonangol Namibe
   "9330563": { lat: 24.45553, lng: 52.87682 },  // Sanmar Herald
   "9416422": { lat: 25.92016, lng: 55.49529 },  // Ocean Thunder
