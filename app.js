@@ -1444,7 +1444,12 @@ class ShipTracker {
         if (pos) return pos;
       } catch {}
     }
-    // Fallback: myshiptracking.com scraping
+    // Fallback 1: shipinfo.net
+    try {
+      const pos = await this.fetchFromShipInfo(ship);
+      if (pos) return pos;
+    } catch {}
+    // Fallback 2: myshiptracking.com scraping
     return this.fetchFromMyShipTracking(ship);
   }
 
@@ -1475,6 +1480,25 @@ class ShipTracker {
     }
 
     return { lat, lng, speed: 0, course: 0, lastUpdate };
+  }
+
+  async fetchFromShipInfo(ship) {
+    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(
+      `https://shipinfo.net/vessels_map_imo_${ship.imo}`
+    )}`;
+    const resp = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    if (!resp.ok) return null;
+    const html = await resp.text();
+
+    const coordMatch = html.match(/LatLng\(([\d.-]+),\s*([\d.-]+)\)/);
+    if (!coordMatch) return null;
+
+    const lat = parseFloat(coordMatch[1]);
+    const lng = parseFloat(coordMatch[2]);
+    if (lat === 0 && lng === 0) return null;
+    if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+
+    return { lat, lng, speed: 0, course: 0, lastUpdate: Date.now() };
   }
 
   async fetchFromMyShipTracking(ship) {

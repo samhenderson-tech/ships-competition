@@ -92,6 +92,31 @@ async function fetchFromVesselFinder(mmsi, name) {
   }
 }
 
+// Fetch position from shipinfo.net (scrape coordinates from vessel page)
+async function fetchFromShipInfo(imo, name) {
+  try {
+    const url = `https://shipinfo.net/vessels_map_imo_${imo}`;
+    const resp = await fetchWithTimeout(url);
+    if (!resp.ok) return null;
+    const html = await resp.text();
+
+    // Look for coordinates in the page (various formats)
+    const coordMatch = html.match(/LatLng\(([\d.-]+),\s*([\d.-]+)\)/) ||
+                       html.match(/lat['":\s]+([\d.-]+)[^]*?lng['":\s]+([\d.-]+)/) ||
+                       html.match(/position.*?([\d.-]+).*?([\d.-]+)/);
+    if (!coordMatch) return null;
+
+    const lat = parseFloat(coordMatch[1]);
+    const lng = parseFloat(coordMatch[2]);
+    if (lat === 0 && lng === 0) return null;
+    if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
+
+    return { lat, lng };
+  } catch {
+    return null;
+  }
+}
+
 // Direct vessel page URLs for ships where IMO search doesn't find them
 const DIRECT_URLS = {
 };
@@ -138,9 +163,12 @@ async function fetchShipPosition(imo, name, mmsi) {
   if (mmsi) {
     const pos = await fetchFromVesselFinder(mmsi, name);
     if (pos) return pos;
-    console.log(`    VesselFinder failed for ${name}, trying myshiptracking...`);
+    console.log(`    VesselFinder failed for ${name}, trying fallbacks...`);
   }
-  // Fallback: myshiptracking.com
+  // Fallback 1: shipinfo.net
+  const shipInfoPos = await fetchFromShipInfo(imo, name);
+  if (shipInfoPos) return shipInfoPos;
+  // Fallback 2: myshiptracking.com
   return fetchFromMyShipTracking(imo, name);
 }
 
