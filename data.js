@@ -95,25 +95,25 @@ const PARTICIPANTS = [
 const REAL_POSITIONS = {
   "9785835": { lat: 25.62719, lng: 54.63814 },  // Monte Urbasa
   "9779848": { lat: 25.23260, lng: 54.58411 },  // Shaden
-  "9307750": { lat: 26.19787, lng: 55.91195 },  // Jag Vasant
+  "9307750": { lat: 26.20377, lng: 55.88708 },  // Jag Vasant
   "9275983": { lat: 24.32633, lng: 51.64698 },  // Rose 25
   "9385037": { lat: 23.97086, lng: 52.24584 },  // Long Wind
   "9460136": { lat: 24.39976, lng: 52.93532 },  // P.ALIKI
-  "9608867": { lat: 24.48990, lng: 52.90602 },  // Magic Victoria
+  "9608867": { lat: 27.57447, lng: 50.51996 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
-  "9936549": { lat: 26.09523, lng: 53.33768 },  // Eco Oracle
-  "9833735": { lat: 23.95235, lng: 52.23678 },  // Siena
+  "9936549": { lat: 26.11157, lng: 53.28137 },  // Eco Oracle
+  "9833735": { lat: 24.33250, lng: 52.63463 },  // Siena
   "9489027": { lat: 25.41684, lng: 55.01254 },  // Abu Dhabi III
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
-  "9262912": { lat: 25.59795, lng: 55.08886 },  // Auroura
+  "9262912": { lat: 25.59825, lng: 55.08915 },  // Auroura
   "9288095": { lat: 17.22686, lng: 70.40936 },  // Lan Jing
-  "9299563": { lat: 25.90701, lng: 55.37771 },  // North Star
-  "1120510": { lat: 26.03125, lng: 55.93612 },  // Maria
+  "9299563": { lat: 25.90698, lng: 55.37768 },  // North Star
+  "1120510": { lat: 26.03127, lng: 55.93612 },  // Maria
   "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
-  "9284960": { lat: 26.30905, lng: 53.18380 },  // Ocean Lily
-  "9933547": { lat: 28.71603, lng: 49.30027 },  // Advantage Victory
-  "9976927": { lat: 23.98025, lng: 52.24046 },  // Lebrethah
-  "9903413": { lat: 26.87442, lng: 56.65921 },  // Karachi
+  "9284960": { lat: 26.31018, lng: 53.18349 },  // Ocean Lily
+  "9933547": { lat: 28.71526, lng: 49.29955 },  // Advantage Victory
+  "9976927": { lat: 25.92588, lng: 52.31448 },  // Lebrethah
+  "9903413": { lat: 25.64820, lng: 56.87148 },  // Karachi
   "9088536": { lat: 24.94020, lng: 54.23993 },  // Sea Bird
   "9750050": { lat: 24.32631, lng: 51.64706 },  // Diligent Warrior
   "9251585": { lat: 25.82900, lng: 53.41100 },  // Nature Heart
@@ -126,8 +126,8 @@ const REAL_POSITIONS = {
   "9493779": { lat: 25.92169, lng: 55.49303 },  // Smyrni
   "9308766": { lat: 25.79056, lng: 56.86581 },  // Parimal
   "9410399": { lat: 24.32626, lng: 51.64697 },  // Serifos
-  "9626285": { lat: 25.88215, lng: 53.13000 },  // GasLog Skagen
-  "9718777": { lat: 25.82324, lng: 53.06949 },  // Mahadah Silver
+  "9626285": { lat: 26.04209, lng: 52.93344 },  // GasLog Skagen
+  "9718777": { lat: 25.82128, lng: 53.06672 },  // Mahadah Silver
   "9593517": { lat: 25.89098, lng: 55.41337 },  // Safeen Prestige
   "9325049": { lat: 29.56028, lng: 48.84260 },  // Sonangol Namibe
   "9330563": { lat: 24.45553, lng: 52.87682 },  // Sanmar Herald
