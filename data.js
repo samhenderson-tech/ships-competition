@@ -93,46 +93,46 @@ const PARTICIPANTS = [
 // Real ship positions fetched from AIS data (myshiptracking.com)
 // Last updated: 2026-03-18
 const REAL_POSITIONS = {
-  "9785835": { lat: 25.72400, lng: 55.40445 },  // Monte Urbasa
+  "9785835": { lat: 25.72673, lng: 55.40541 },  // Monte Urbasa
   "9779848": { lat: 25.77468, lng: 53.27438 },  // Shaden
-  "9307750": { lat: 26.01241, lng: 55.81919 },  // Jag Vasant
-  "9275983": { lat: 25.73343, lng: 54.92032 },  // Rose 25
-  "9385037": { lat: 25.75062, lng: 53.76704 },  // Long Wind
+  "9307750": { lat: 26.00546, lng: 55.81368 },  // Jag Vasant
+  "9275983": { lat: 25.73395, lng: 54.91968 },  // Rose 25
+  "9385037": { lat: 25.75038, lng: 53.76578 },  // Long Wind
   "9460136": { lat: 24.39976, lng: 52.93532 },  // P.ALIKI
-  "9608867": { lat: 27.58963, lng: 50.63365 },  // Magic Victoria
+  "9608867": { lat: 27.58225, lng: 50.65377 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
-  "9936549": { lat: 26.07447, lng: 53.50091 },  // Eco Oracle
-  "9833735": { lat: 25.72475, lng: 55.40405 },  // Siena
+  "9936549": { lat: 26.06332, lng: 53.51108 },  // Eco Oracle
+  "9833735": { lat: 25.72477, lng: 55.40414 },  // Siena
   "9489027": { lat: 25.41847, lng: 55.02077 },  // Abu Dhabi III
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
-  "9262912": { lat: 28.89617, lng: 49.81010 },  // Auroura
+  "9262912": { lat: 28.76739, lng: 49.91288 },  // Auroura
   "9288095": { lat: 7.05525, lng: 76.62223 },  // Lan Jing
-  "9299563": { lat: 25.94324, lng: 55.45190 },  // North Star
-  "1120510": { lat: 26.03274, lng: 55.93857 },  // Maria
+  "9299563": { lat: 25.93940, lng: 55.44908 },  // North Star
+  "1120510": { lat: 26.03188, lng: 55.93731 },  // Maria
   "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
-  "9284960": { lat: 26.20760, lng: 53.23116 },  // Ocean Lily
-  "9933547": { lat: 28.71675, lng: 49.30095 },  // Advantage Victory
-  "9976927": { lat: 25.92290, lng: 52.32013 },  // Lebrethah
-  "9903413": { lat: 24.74303, lng: 66.69743 },  // Karachi
+  "9284960": { lat: 26.13771, lng: 53.21908 },  // Ocean Lily
+  "9933547": { lat: 28.71681, lng: 49.30092 },  // Advantage Victory
+  "9976927": { lat: 25.92295, lng: 52.32023 },  // Lebrethah
+  "9903413": { lat: 24.74397, lng: 66.69744 },  // Karachi
   "9088536": { lat: 25.21002, lng: 56.68751 },  // Sea Bird
   "9750050": { lat: 24.63279, lng: 52.64746 },  // Diligent Warrior
   "9251585": { lat: 25.82900, lng: 53.41100 },  // Nature Heart
-  "9254850": { lat: 25.50072, lng: 55.22006 },  // Camilla
-  "1028762": { lat: 25.61837, lng: 54.84776 },  // Stoic Warrior
-  "9315680": { lat: 26.03849, lng: 55.71685 },  // Pine Gas
+  "9254850": { lat: 25.56742, lng: 55.32518 },  // Camilla
+  "1028762": { lat: 25.61838, lng: 54.84753 },  // Stoic Warrior
+  "9315680": { lat: 26.03555, lng: 55.71576 },  // Pine Gas
   "9174361": { lat: 25.54713, lng: 55.31054 },  // Galaxy Gas
   "9832262": { lat: 24.94142, lng: 54.23176 },  // Front Shanghai
   "9937103": { lat: 25.58781, lng: 54.95856 },  // Front Beauly
-  "9493779": { lat: 18.93728, lng: 72.89384 },  // Smyrni
+  "9493779": { lat: 18.93728, lng: 72.89383 },  // Smyrni
   "9308766": { lat: 25.58387, lng: 56.60236 },  // Parimal
-  "9410399": { lat: 25.59389, lng: 54.88096 },  // Serifos
-  "9626285": { lat: 26.01926, lng: 51.95633 },  // GasLog Skagen
-  "9718777": { lat: 25.60917, lng: 53.23449 },  // Mahadah Silver
+  "9410399": { lat: 25.59485, lng: 54.88035 },  // Serifos
+  "9626285": { lat: 26.06356, lng: 52.17788 },  // GasLog Skagen
+  "9718777": { lat: 25.60909, lng: 53.23407 },  // Mahadah Silver
   "9593517": { lat: 25.89098, lng: 55.41337 },  // Safeen Prestige
   "9325049": { lat: 29.56028, lng: 48.84260 },  // Sonangol Namibe
   "9330563": { lat: 25.94084, lng: 55.36515 },  // Sanmar Herald
-  "9416422": { lat: 26.00711, lng: 53.41129 },  // Ocean Thunder
-  "9397327": { lat: 25.45140, lng: 52.12559 },  // Al Kharaitiyat
+  "9416422": { lat: 25.99952, lng: 53.41108 },  // Ocean Thunder
+  "9397327": { lat: 25.45118, lng: 52.12467 },  // Al Kharaitiyat
 };
 
 // Strait of Hormuz coordinates
