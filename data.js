@@ -93,46 +93,46 @@ const PARTICIPANTS = [
 // Real ship positions fetched from AIS data (myshiptracking.com)
 // Last updated: 2026-03-31
 const REAL_POSITIONS = {
-  "9785835": { lat: 25.62754, lng: 54.64017 },  // Monte Urbasa
-  "9779848": { lat: 25.80465, lng: 53.10697 },  // Shaden
+  "9785835": { lat: 25.62720, lng: 54.64142 },  // Monte Urbasa
+  "9779848": { lat: 25.77569, lng: 53.10859 },  // Shaden
   "9307750": { lat: 19.15561, lng: 72.46235 },  // Jag Vasant
-  "9275983": { lat: 25.43818, lng: 55.01745 },  // Rose 25
-  "9385037": { lat: 25.71620, lng: 53.79497 },  // Long Wind
-  "9460136": { lat: 24.66611, lng: 66.79748 },  // P.ALIKI
+  "9275983": { lat: 25.43748, lng: 55.01882 },  // Rose 25
+  "9385037": { lat: 25.71264, lng: 53.80069 },  // Long Wind
+  "9460136": { lat: 24.70793, lng: 66.89586 },  // P.ALIKI
   "9608867": { lat: 27.61838, lng: 50.70379 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
-  "9936549": { lat: 25.91384, lng: 53.58082 },  // Eco Oracle
-  "9833735": { lat: 25.22171, lng: 54.39003 },  // Siena
-  "9489027": { lat: 23.05649, lng: 59.56764 },  // Abu Dhabi III
+  "9936549": { lat: 25.87201, lng: 53.62747 },  // Eco Oracle
+  "9833735": { lat: 25.12985, lng: 54.21640 },  // Siena
+  "9489027": { lat: 23.10282, lng: 59.50742 },  // Abu Dhabi III
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
-  "9262912": { lat: 25.53295, lng: 54.98635 },  // Auroura
-  "9288095": { lat: 1.91490, lng: 104.82178 },  // Lan Jing
-  "9299563": { lat: 25.77094, lng: 56.89735 },  // North Star
-  "1120510": { lat: 26.03263, lng: 55.94397 },  // Maria
+  "9262912": { lat: 25.59607, lng: 55.10028 },  // Auroura
+  "9288095": { lat: 1.91623, lng: 104.82345 },  // Lan Jing
+  "9299563": { lat: 25.77127, lng: 56.89797 },  // North Star
+  "1120510": { lat: 26.03263, lng: 55.94390 },  // Maria
   "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
-  "9284960": { lat: 26.08268, lng: 53.56532 },  // Ocean Lily
+  "9284960": { lat: 26.06353, lng: 53.57731 },  // Ocean Lily
   "9933547": { lat: 28.04366, lng: 49.62385 },  // Advantage Victory
-  "9976927": { lat: 25.92868, lng: 52.31815 },  // Lebrethah
-  "9903413": { lat: 24.48956, lng: 58.15246 },  // Karachi
+  "9976927": { lat: 25.92545, lng: 52.31820 },  // Lebrethah
+  "9903413": { lat: 24.23382, lng: 58.64551 },  // Karachi
   "9088536": { lat: 23.61249, lng: 60.94838 },  // Sea Bird
   "9750050": { lat: 24.41494, lng: 52.47459 },  // Diligent Warrior
   "9251585": { lat: 6.91480, lng: 76.79330 },  // Nature Heart
   "9254850": { lat: 25.88273, lng: 57.16633 },  // Camilla
-  "1028762": { lat: 25.62110, lng: 54.84801 },  // Stoic Warrior
+  "1028762": { lat: 25.61860, lng: 54.85272 },  // Stoic Warrior
   "9315680": { lat: 5.79415, lng: 81.40361 },  // Pine Gas
   "9174361": { lat: 25.54713, lng: 55.31054 },  // Galaxy Gas
   "9832262": { lat: 24.94142, lng: 54.23176 },  // Front Shanghai
   "9937103": { lat: 2.20103, lng: 102.00514 },  // Front Beauly
-  "9493779": { lat: 11.81775, lng: 70.19163 },  // Smyrni
+  "9493779": { lat: 11.67865, lng: 70.30033 },  // Smyrni
   "9308766": { lat: 25.35350, lng: 56.62333 },  // Parimal
-  "9410399": { lat: 25.59833, lng: 54.88415 },  // Serifos
-  "9626285": { lat: 28.20076, lng: 50.11411 },  // GasLog Skagen
-  "9718777": { lat: 25.46513, lng: 54.75763 },  // Mahadah Silver
+  "9410399": { lat: 25.59435, lng: 54.88741 },  // Serifos
+  "9626285": { lat: 27.40189, lng: 50.61076 },  // GasLog Skagen
+  "9718777": { lat: 25.46427, lng: 54.75800 },  // Mahadah Silver
   "9593517": { lat: 25.89098, lng: 55.41337 },  // Safeen Prestige
   "9325049": { lat: 29.56028, lng: 48.84260 },  // Sonangol Namibe
   "9330563": { lat: 25.94390, lng: 55.38265 },  // Sanmar Herald
-  "9416422": { lat: 25.56183, lng: 54.29786 },  // Ocean Thunder
-  "9397327": { lat: 25.78897, lng: 51.81467 },  // Al Kharaitiyat
+  "9416422": { lat: 26.15158, lng: 53.66527 },  // Ocean Thunder
+  "9397327": { lat: 25.78854, lng: 51.80898 },  // Al Kharaitiyat
 };
 
 // Strait of Hormuz coordinates
