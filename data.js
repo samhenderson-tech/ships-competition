@@ -93,46 +93,46 @@ const PARTICIPANTS = [
 // Real ship positions fetched from AIS data (myshiptracking.com)
 // Last updated: 2026-04-06
 const REAL_POSITIONS = {
-  "9785835": { lat: 25.62816, lng: 54.64242 },  // Monte Urbasa
+  "9785835": { lat: 25.62751, lng: 54.64225 },  // Monte Urbasa
   "9779848": { lat: 25.80555, lng: 53.10070 },  // Shaden
-  "9307750": { lat: 18.86522, lng: 72.66241 },  // Jag Vasant
-  "9275983": { lat: 29.66032, lng: 48.68718 },  // Rose 25
-  "9385037": { lat: 25.53937, lng: 54.87136 },  // Long Wind
-  "9460136": { lat: 25.21777, lng: 56.41966 },  // P.ALIKI
-  "9608867": { lat: 25.50349, lng: 54.93415 },  // Magic Victoria
+  "9307750": { lat: 18.83768, lng: 72.74337 },  // Jag Vasant
+  "9275983": { lat: 29.66182, lng: 48.68462 },  // Rose 25
+  "9385037": { lat: 25.53808, lng: 54.87107 },  // Long Wind
+  "9460136": { lat: 25.23290, lng: 56.45998 },  // P.ALIKI
+  "9608867": { lat: 25.52299, lng: 54.94488 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
-  "9936549": { lat: 25.76259, lng: 53.92880 },  // Eco Oracle
-  "9833735": { lat: 25.12039, lng: 54.19467 },  // Siena
+  "9936549": { lat: 25.78816, lng: 53.87557 },  // Eco Oracle
+  "9833735": { lat: 25.10876, lng: 54.14290 },  // Siena
   "9489027": { lat: 24.97561, lng: 56.93602 },  // Abu Dhabi III
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
-  "9262912": { lat: 25.59611, lng: 55.10321 },  // Auroura
+  "9262912": { lat: 25.59600, lng: 55.10327 },  // Auroura
   "9288095": { lat: 7.77549, lng: 109.48682 },  // Lan Jing
-  "9299563": { lat: 25.76746, lng: 56.89915 },  // North Star
-  "1120510": { lat: 25.54420, lng: 55.23237 },  // Maria
+  "9299563": { lat: 25.76776, lng: 56.90004 },  // North Star
+  "1120510": { lat: 25.54408, lng: 55.23245 },  // Maria
   "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
-  "9284960": { lat: 25.53892, lng: 55.28525 },  // Ocean Lily
+  "9284960": { lat: 25.53739, lng: 55.28583 },  // Ocean Lily
   "9933547": { lat: 28.04366, lng: 49.62385 },  // Advantage Victory
-  "9976927": { lat: 25.95004, lng: 52.24799 },  // Lebrethah
+  "9976927": { lat: 25.95017, lng: 52.24887 },  // Lebrethah
   "9903413": { lat: 24.66392, lng: 66.92504 },  // Karachi
   "9088536": { lat: 21.14821, lng: 66.23220 },  // Sea Bird
   "9750050": { lat: 24.41494, lng: 52.47459 },  // Diligent Warrior
-  "9251585": { lat: 3.11373, lng: 100.64343 },  // Nature Heart
+  "9251585": { lat: 2.93057, lng: 100.86250 },  // Nature Heart
   "9254850": { lat: 22.37250, lng: 59.99393 },  // Camilla
-  "1028762": { lat: 25.62081, lng: 54.85742 },  // Stoic Warrior
+  "1028762": { lat: 25.62043, lng: 54.85712 },  // Stoic Warrior
   "9315680": { lat: 20.94266, lng: 87.08025 },  // Pine Gas
   "9174361": { lat: 25.40143, lng: 56.51206 },  // Galaxy Gas
   "9832262": { lat: 24.94142, lng: 54.23176 },  // Front Shanghai
   "9937103": { lat: 2.20103, lng: 102.00514 },  // Front Beauly
-  "9493779": { lat: 6.26411, lng: 95.18265 },  // Smyrni
-  "9308766": { lat: 25.36451, lng: 56.51792 },  // Parimal
-  "9410399": { lat: 25.59789, lng: 54.88802 },  // Serifos
-  "9626285": { lat: 26.61183, lng: 51.33611 },  // GasLog Skagen
-  "9718777": { lat: 25.34189, lng: 53.81462 },  // Mahadah Silver
+  "9493779": { lat: 6.17809, lng: 95.45644 },  // Smyrni
+  "9308766": { lat: 25.36496, lng: 56.51834 },  // Parimal
+  "9410399": { lat: 25.59691, lng: 54.88822 },  // Serifos
+  "9626285": { lat: 26.09843, lng: 51.88022 },  // GasLog Skagen
+  "9718777": { lat: 25.34174, lng: 53.81453 },  // Mahadah Silver
   "9593517": { lat: 25.89098, lng: 55.41337 },  // Safeen Prestige
   "9325049": { lat: 29.56028, lng: 48.84260 },  // Sonangol Namibe
   "9330563": { lat: 25.94390, lng: 55.38265 },  // Sanmar Herald
-  "9416422": { lat: 23.60931, lng: 59.76322 },  // Ocean Thunder
-  "9397327": { lat: 25.78718, lng: 51.81245 },  // Al Kharaitiyat
+  "9416422": { lat: 23.32297, lng: 60.12785 },  // Ocean Thunder
+  "9397327": { lat: 25.78720, lng: 51.81259 },  // Al Kharaitiyat
 };
 
 // Strait of Hormuz coordinates
