@@ -96,10 +96,10 @@ const REAL_POSITIONS = {
   "9785835": { lat: 25.62656, lng: 54.63938 },  // Monte Urbasa
   "9779848": { lat: 25.83029, lng: 53.05797 },  // Shaden
   "9307750": { lat: 18.83865, lng: 72.74006 },  // Jag Vasant
-  "9275983": { lat: 30.19875, lng: 47.88138 },  // Rose 25
+  "9275983": { lat: 30.19877, lng: 47.88142 },  // Rose 25
   "9385037": { lat: 25.67878, lng: 53.77099 },  // Long Wind
   "9460136": { lat: 24.46569, lng: 66.43108 },  // P.ALIKI
-  "9608867": { lat: 28.97505, lng: 49.77321 },  // Magic Victoria
+  "9608867": { lat: 29.10348, lng: 49.65782 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
   "9936549": { lat: 25.62691, lng: 53.84237 },  // Eco Oracle
   "9833735": { lat: 25.09929, lng: 54.11465 },  // Siena
@@ -107,7 +107,7 @@ const REAL_POSITIONS = {
   "1137745": { lat: 25.63534, lng: 55.12522 },  // Spade
   "9262912": { lat: 26.06188, lng: 55.80987 },  // Auroura
   "9288095": { lat: 24.84789, lng: 122.64429 },  // Lan Jing
-  "9299563": { lat: 25.59713, lng: 57.55879 },  // North Star
+  "9299563": { lat: 25.31860, lng: 57.92833 },  // North Star
   "1120510": { lat: 25.53940, lng: 55.28553 },  // Maria
   "9220940": { lat: 24.81876, lng: 56.99120 },  // Sands
   "9284960": { lat: 25.55452, lng: 55.29279 },  // Ocean Lily
@@ -116,14 +116,14 @@ const REAL_POSITIONS = {
   "9903413": { lat: 24.66392, lng: 66.92504 },  // Karachi
   "9088536": { lat: 21.14821, lng: 66.23220 },  // Sea Bird
   "9750050": { lat: 24.41494, lng: 52.47459 },  // Diligent Warrior
-  "9251585": { lat: 3.56358, lng: 105.57188 },  // Nature Heart
+  "9251585": { lat: 3.65297, lng: 105.61913 },  // Nature Heart
   "9254850": { lat: 22.37250, lng: 59.99393 },  // Camilla
   "1028762": { lat: 25.62175, lng: 54.85301 },  // Stoic Warrior
   "9315680": { lat: 20.94266, lng: 87.08025 },  // Pine Gas
   "9174361": { lat: 24.31572, lng: 66.29213 },  // Galaxy Gas
   "9832262": { lat: 24.94142, lng: 54.23176 },  // Front Shanghai
   "9937103": { lat: 2.20103, lng: 102.00514 },  // Front Beauly
-  "9493779": { lat: 1.22549, lng: 103.67886 },  // Smyrni
+  "9493779": { lat: 1.22552, lng: 103.67880 },  // Smyrni
   "9308766": { lat: 25.36508, lng: 56.51921 },  // Parimal
   "9410399": { lat: 26.77269, lng: 56.50308 },  // Serifos
   "9626285": { lat: 27.80818, lng: 50.46492 },  // GasLog Skagen
