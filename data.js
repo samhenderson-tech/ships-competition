@@ -96,10 +96,10 @@ const REAL_POSITIONS = {
   "9785835": { lat: 25.62656, lng: 54.63938 },  // Monte Urbasa
   "9779848": { lat: 25.83029, lng: 53.05797 },  // Shaden
   "9307750": { lat: 18.83865, lng: 72.74006 },  // Jag Vasant
-  "9275983": { lat: 30.19878, lng: 47.88138 },  // Rose 25
+  "9275983": { lat: 30.19877, lng: 47.88138 },  // Rose 25
   "9385037": { lat: 25.67878, lng: 53.77099 },  // Long Wind
-  "9460136": { lat: 24.28308, lng: 66.06914 },  // P.ALIKI
-  "9608867": { lat: 28.57838, lng: 50.09442 },  // Magic Victoria
+  "9460136": { lat: 24.33917, lng: 66.20005 },  // P.ALIKI
+  "9608867": { lat: 28.70379, lng: 49.99420 },  // Magic Victoria
   "9982536": { lat: 25.22397, lng: 54.58023 },  // Nord Victor
   "9936549": { lat: 25.62691, lng: 53.84237 },  // Eco Oracle
   "9833735": { lat: 25.09929, lng: 54.11465 },  // Siena
@@ -116,14 +116,14 @@ const REAL_POSITIONS = {
   "9903413": { lat: 24.66392, lng: 66.92504 },  // Karachi
   "9088536": { lat: 21.14821, lng: 66.23220 },  // Sea Bird
   "9750050": { lat: 24.41494, lng: 52.47459 },  // Diligent Warrior
-  "9251585": { lat: 3.27738, lng: 105.41672 },  // Nature Heart
+  "9251585": { lat: 3.35310, lng: 105.45840 },  // Nature Heart
   "9254850": { lat: 22.37250, lng: 59.99393 },  // Camilla
   "1028762": { lat: 25.62175, lng: 54.85301 },  // Stoic Warrior
   "9315680": { lat: 20.94266, lng: 87.08025 },  // Pine Gas
-  "9174361": { lat: 24.29797, lng: 66.35345 },  // Galaxy Gas
+  "9174361": { lat: 24.31572, lng: 66.29213 },  // Galaxy Gas
   "9832262": { lat: 24.94142, lng: 54.23176 },  // Front Shanghai
   "9937103": { lat: 2.20103, lng: 102.00514 },  // Front Beauly
-  "9493779": { lat: 1.22546, lng: 103.67889 },  // Smyrni
+  "9493779": { lat: 1.22548, lng: 103.67885 },  // Smyrni
   "9308766": { lat: 25.36508, lng: 56.51921 },  // Parimal
   "9410399": { lat: 25.59912, lng: 54.88307 },  // Serifos
   "9626285": { lat: 27.80818, lng: 50.46492 },  // GasLog Skagen
